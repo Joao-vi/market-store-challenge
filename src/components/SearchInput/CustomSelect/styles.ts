@@ -7,7 +7,6 @@ export const SelectButton = styled.button`
   border-radius: 8px;
   padding: 5px 10px;
   gap: 5px;
-  width: 167px;
 
   background-color: #230f5b;
   color: #fff;

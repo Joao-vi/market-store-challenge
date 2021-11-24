@@ -6,9 +6,9 @@ interface OptionsProps extends InputHTMLAttributes<HTMLInputElement> {
 
 export function Option({ type = "radio", id, name, value, title }: OptionsProps) {
   return (
-    <div>
+    <>
       <label htmlFor={id}>{title}</label>
       <input type={type} id={id} name={name} value={value} />
-    </div>
+    </>
   );
 }

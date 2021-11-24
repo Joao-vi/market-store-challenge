@@ -1,6 +1,6 @@
 import { ReactNode, useCallback, useEffect, useReducer, useState } from "react";
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";
-import { Flex } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
 
 import { SelectDropDown, SelectButton } from "./styles";
 
@@ -26,14 +26,15 @@ export function SelectInput({ label, children }: SelectInputProps) {
     setSelectButtonLabel(event.target.innerHTML);
   }
   return (
-    <Flex flexDir="column" justifyContent="center" ml="4" fontSize="18px" position="relative">
+    <Box fontSize="18px" position="relative">
       <SelectButton onClick={toggleDropDownVisible}>
         {selectButtonLabel || `${label}`}
         <MdOutlineKeyboardArrowDown fontSize="26px" />
       </SelectButton>
+
       {isDropDownVisible && (
         <SelectDropDown onClick={handleChangeSelectButtonLabel}>{children}</SelectDropDown>
       )}
-    </Flex>
+    </Box>
   );
 }

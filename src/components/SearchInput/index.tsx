@@ -7,14 +7,14 @@ import { Option } from "./CustomSelect/option";
 
 export function SearchInput() {
   return (
-    <Stack spacing="24px" w="312px">
-      <InputGroup w="312px">
+    <Stack w="312px" alignItems="center" justifyContent="center" mx="auto">
+      <InputGroup>
         <Input placeholder="Pesquisar na loja.." variant="outline" borderColor="#230F5B" />
         <InputRightElement>
           <Icon fontSize="25px" as={AiOutlineSearch} />
         </InputRightElement>
       </InputGroup>
-      <Flex>
+      <Flex justifyContent="space-between" w="100%">
         <SelectInput label="Filter by rating">
           <Option title="1 Start" name="select-options-stars" id="op-1" value="1" />
           <Option title="2 Starts" name="select-options-stars" id="op-2" value="2" />
