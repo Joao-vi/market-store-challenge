@@ -16,7 +16,7 @@ export const theme = extendTheme({
     global: (props: ColorModeProviderProps) => {
       return {
         body: {
-          bg: mode("#E5E5E5", "rgb(26 32 44)")(props),
+          bg: mode("#fff", "rgb(26 32 44)")(props),
           color: mode("#230F5B", "#F7FAFC")(props),
         },
       };

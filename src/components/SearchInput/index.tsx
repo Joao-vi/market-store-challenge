@@ -7,7 +7,7 @@ import { Option } from "./CustomSelect/option";
 
 export function SearchInput() {
   return (
-    <Stack w="312px" alignItems="center" justifyContent="center" mx="auto">
+    <Stack w="350px" alignItems="center" justifyContent="center" mx="auto">
       <InputGroup>
         <Input placeholder="Pesquisar na loja.." variant="outline" borderColor="#230F5B" />
         <InputRightElement>
