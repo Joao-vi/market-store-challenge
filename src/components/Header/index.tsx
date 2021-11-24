@@ -7,14 +7,7 @@ export function Header() {
   const toggleThemeButton = useColorModeValue(<BsSunFill />, <BsMoonFill />);
 
   return (
-    <Flex
-      as="header"
-      justifyContent="space-between"
-      maxW={1200}
-      w="94%"
-      mx="auto"
-      pt={34}
-    >
+    <Flex as="header" justifyContent="space-between" maxW={1200} w="94%" mx="auto" pt={34}>
       <Text as="span" fontWeight="700" fontSize={28}>
         Market
       </Text>
