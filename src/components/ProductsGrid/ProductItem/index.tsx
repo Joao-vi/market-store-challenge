@@ -1,4 +1,5 @@
 import { Stack, Image, Text, Button, Flex } from "@chakra-ui/react";
+// @ts-ignore
 import ReactStars from "react-rating-stars-component";
 
 interface ProductItemProps {
@@ -56,7 +57,7 @@ export function ProductItem({
         <Text as="h2" fontWeight="bold">
           {`Price: `}
           <Text as="span" fontWeight="normal">
-            ${price}
+            $ {price}
           </Text>
         </Text>
       </Stack>
