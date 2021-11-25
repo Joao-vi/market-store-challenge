@@ -1,8 +1,9 @@
-import { ReactNode, useCallback, useEffect, useReducer, useState } from "react";
+import { ReactNode, useCallback, useContext, useEffect, useReducer, useState } from "react";
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 import { Box } from "@chakra-ui/react";
 
 import { SelectDropDown, SelectButton } from "./styles";
+import { searchInputConext } from "../../../context/searchInputContext";
 
 interface SelectInputProps {
   label: string;

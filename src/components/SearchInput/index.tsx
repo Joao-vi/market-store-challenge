@@ -1,15 +1,26 @@
 // prettier-ignore
 import { Input, InputGroup, InputRightElement, Icon ,Stack,Flex, } from "@chakra-ui/react";
+import { useContext } from "react";
 import { AiOutlineSearch } from "react-icons/ai";
 
 import { SelectInput } from "./CustomSelect/";
 import { Option } from "./CustomSelect/option";
 
+import { searchInputConext } from "../../context/searchInputContext";
+
 export function SearchInput() {
+  const { input, setInput } = useContext(searchInputConext);
+
   return (
     <Stack w="350px" alignItems="center" justifyContent="center" mx="auto">
       <InputGroup>
-        <Input placeholder="Pesquisar na loja.." variant="outline" borderColor="#230F5B" />
+        <Input
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+          placeholder="Pesquisar na loja.."
+          variant="outline"
+          borderColor="#230F5B"
+        />
         <InputRightElement>
           <Icon fontSize="25px" as={AiOutlineSearch} />
         </InputRightElement>

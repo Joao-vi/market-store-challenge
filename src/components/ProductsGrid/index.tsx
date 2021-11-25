@@ -1,7 +1,8 @@
 import { HStack, Text, VStack, Button } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
-import { api } from "../../services/api";
+import { useContext, useState } from "react";
 
+import { productContext } from "../../context/productContext";
+import { searchInputConext } from "../../context/searchInputContext";
 import { ProductItem } from "./ProductItem";
 
 interface IAPIData {
@@ -15,11 +16,16 @@ interface IAPIData {
 }
 
 export function ProductsGrid() {
-  const [products, setProducts] = useState<IAPIData[]>([]);
+  const { products } = useContext(productContext);
+  const { input } = useContext(searchInputConext);
   const [indexPagination, setIndexPagination] = useState(1);
 
   const hasProducts = products.length > 0;
-  const qtdProducts = Math.ceil(products.length / 3);
+  const qtdProducts = Math.ceil(
+    products.filter((product) => {
+      return product.title.includes(input);
+    }).length / 3
+  );
   const isPrevButtonDisable = indexPagination === 1;
   const isNextButtonDisavle = indexPagination === qtdProducts;
 
@@ -29,21 +35,21 @@ export function ProductsGrid() {
   const shouldRenderProduct = (key: number) =>
     indexPagination * 3 - 3 <= key && key <= indexPagination * 3 - 1;
 
-  useEffect(() => {
-    fetch(`${api.base_url}/${api.products}`)
-      .then((response) => response.json().then((data) => setProducts(data)))
-      .catch((e) => console.log(e));
-  }, []);
+  const handleFilterProducts = () =>
+    products.filter((product) => {
+      return product.title.includes(input);
+    });
 
+  const handleRenderProduct = (product: IAPIData, key: number) => {
+    if (shouldRenderProduct(key)) {
+      return <ProductItem {...product} key={`product-${key}-${product.id}`} />;
+    }
+  };
   return (
     <VStack>
       <HStack spacing="20px" alignItems="stretch" justifyContent="space-between" my={42}>
         {hasProducts ? (
-          products.map((product, key) => {
-            if (shouldRenderProduct(key)) {
-              return <ProductItem {...product} key={`product-${key}-${product.id}`} />;
-            }
-          })
+          handleFilterProducts().map(handleRenderProduct)
         ) : (
           <Text as="h1" color="black">
             Sem dados
