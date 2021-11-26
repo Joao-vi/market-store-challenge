@@ -1,9 +1,13 @@
 import { Stack, Image, Text, Button, Flex } from "@chakra-ui/react";
 // @ts-ignore
 import ReactStars from "react-rating-stars-component";
+import { useContext } from "react";
+
+import { cartContext, IAPIData } from "../../../context/cartContext";
 
 interface ProductItemProps {
   category: string;
+  quantity?: number;
   description: string;
   id: string;
   image: string;
@@ -12,15 +16,35 @@ interface ProductItemProps {
   title: string;
 }
 
-export function ProductItem({
-  category,
-  title,
-  description,
-  id,
-  image,
-  price,
-  rating,
-}: ProductItemProps) {
+// prettier-ignore
+export function ProductItem({title,description,image,price,rating,category,id,quantity = 1,}: ProductItemProps) {
+  const { setCart } = useContext(cartContext);
+
+  const handleSaveProductOnCart = () => {
+    setCart((prevState)=>{
+      const [isEqual,formatedProducts] = handleCheckDuplicatedProducts(prevState);
+      
+      if(isEqual) {
+        return formatedProducts;
+      }else {
+        return [...prevState,{title,description,image,price,rating,category,id,quantity}]
+      }
+    })
+  };
+
+  const handleCheckDuplicatedProducts = (prevState : IAPIData[])=> {
+    let isEqual = false;
+    const formatedProducts = prevState.map((product)=>{
+      if(product.id === id) {
+        isEqual = true ;
+        return {...product,quantity:product.quantity + 1}
+      }else {
+        return product
+      }
+    })
+    return [isEqual,formatedProducts] as const
+  }
+
   const formatedDescription = description.slice(0, 58);
   const formatedTitle = title.slice(0, 18);
 
@@ -63,6 +87,7 @@ export function ProductItem({
       </Stack>
 
       <Button
+        onClick={handleSaveProductOnCart}
         _hover={{ filter: "opacity(.9);" }}
         alignSelf="normal"
         type="button"
@@ -74,3 +99,14 @@ export function ProductItem({
     </Stack>
   );
 }
+
+/*
+ let isEqual = false;
+      const row = prevState.map((product)=> {
+        if(product.id === id){
+          isEqual = true;
+          return {...product,quantity:product.quantity+1}
+        }
+          return product
+      })
+*/

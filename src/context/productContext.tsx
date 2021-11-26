@@ -2,6 +2,7 @@ import { createContext, useState, ReactNode, useCallback } from "react";
 import { api } from "../services/api";
 
 interface IAPIData {
+  quantity: 1;
   category: string;
   description: string;
   id: string;

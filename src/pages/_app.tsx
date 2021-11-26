@@ -4,13 +4,16 @@ import { theme } from "../styles/theme";
 
 import { Header } from "../components/Header";
 import { ProductContextProvider } from "../context/productContext";
+import { CartContextProvider } from "../context/cartContext";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <ChakraProvider theme={theme}>
       <ProductContextProvider>
-        <Header />
-        <Component {...pageProps} />
+        <CartContextProvider>
+          <Header />
+          <Component {...pageProps} />
+        </CartContextProvider>
       </ProductContextProvider>
     </ChakraProvider>
   );
