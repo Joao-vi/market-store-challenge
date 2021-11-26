@@ -5,6 +5,7 @@ import { theme } from "../styles/theme";
 import { Header } from "../components/Header";
 import { ProductContextProvider } from "../context/productContext";
 import { CartContextProvider } from "../context/cartContext";
+import { Footer } from "../components/Footer";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -13,6 +14,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <CartContextProvider>
           <Header />
           <Component {...pageProps} />
+          <Footer />
         </CartContextProvider>
       </ProductContextProvider>
     </ChakraProvider>

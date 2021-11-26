@@ -1,25 +1,12 @@
-import {
-  extendTheme,
-  ThemeConfig,
-  ColorModeProviderProps,
-  ThemeProviderProps,
-} from "@chakra-ui/react";
-import { mode } from "@chakra-ui/theme-tools";
+import { extendTheme } from "@chakra-ui/react";
 
-const config: ThemeConfig = {
-  initialColorMode: "light",
-  useSystemColorMode: false,
-};
 export const theme = extendTheme({
-  config,
   styles: {
-    global: (props: ColorModeProviderProps) => {
-      return {
-        body: {
-          bg: mode("#fff", "rgb(26 32 44)")(props),
-          color: mode("#230F5B", "#F7FAFC")(props),
-        },
-      };
+    global: {
+      body: {
+        bg: "#fff",
+        color: "#230F5B",
+      },
     },
     fonts: {
       heading: "Roboto",

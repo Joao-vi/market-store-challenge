@@ -22,6 +22,7 @@ export function Cart() {
   return (
     <VStack
       as="section"
+      mx="auto"
       border="1px"
       borderColor="#230F5B"
       justifyContent="flex-end"

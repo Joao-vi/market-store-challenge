@@ -1,4 +1,4 @@
-import { Box, Grid, useColorMode } from "@chakra-ui/react";
+import { Box, Grid, GridItem } from "@chakra-ui/react";
 import { useContext, useEffect } from "react";
 import Head from "next/head";
 
@@ -27,9 +27,15 @@ export default function Home() {
       <Box as="main" maxW={1200} w="94%" mx="auto" my={57}>
         <Grid templateColumns="3fr 1fr" templateRows="max-content 1fr">
           <SearchInputProvider>
-            <SearchInput />
-            <Cart />
-            <ProductsGrid />
+            <GridItem>
+              <SearchInput />
+            </GridItem>
+            <GridItem maxH={600} overflowY="auto" rowSpan={2}>
+              <Cart />
+            </GridItem>
+            <GridItem>
+              <ProductsGrid />
+            </GridItem>
           </SearchInputProvider>
         </Grid>
       </Box>
