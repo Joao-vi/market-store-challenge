@@ -27,7 +27,7 @@ export function ProductsGrid() {
     }).length / 3
   );
   const isPrevButtonDisable = indexPagination === 1;
-  const isNextButtonDisavle = indexPagination === qtdProducts;
+  const isNextButtonDisable = indexPagination === qtdProducts;
 
   const nextPage = () => setIndexPagination((prevState) => prevState + 1);
   const prevPage = () => setIndexPagination((prevState) => prevState - 1);
@@ -36,8 +36,8 @@ export function ProductsGrid() {
     indexPagination * 3 - 3 <= key && key <= indexPagination * 3 - 1;
 
   const handleFilterProducts = () =>
-    products.filter((product) => {
-      return product.title.includes(input);
+    products.filter(({ title }) => {
+      return title.toLowerCase().includes(input.toLowerCase());
     });
 
   const handleRenderProduct = (product: IAPIData, key: number) => {
@@ -60,7 +60,7 @@ export function ProductsGrid() {
         <Button cursor="pointer" onClick={prevPage} isDisabled={isPrevButtonDisable}>
           Previous
         </Button>
-        <Button cursor="pointer" onClick={nextPage} isDisabled={isNextButtonDisavle}>
+        <Button cursor="pointer" onClick={nextPage} isDisabled={isNextButtonDisable}>
           Next
         </Button>
       </HStack>
