@@ -20,15 +20,6 @@ export function ProductsGrid() {
   const { input, inputRate, inputSort } = useContext(searchInputConext);
   const [indexPagination, setIndexPagination] = useState(1);
 
-  const hasProducts = products.length > 0;
-  const qtdProducts = Math.ceil(
-    products.filter((product) => {
-      return product.title.includes(input);
-    }).length / 3
-  );
-  const isPrevButtonDisable = indexPagination === 1;
-  const isNextButtonDisable = indexPagination === qtdProducts;
-
   const nextPage = () => setIndexPagination((prevState) => prevState + 1);
   const prevPage = () => setIndexPagination((prevState) => prevState - 1);
 
@@ -65,14 +56,20 @@ export function ProductsGrid() {
       return <ProductItem {...product} key={`product-${key}-${product.id}`} />;
     }
   };
+  const filtredProducts = handleFilterProductsByName()
+    .filter(handeFilterProductsByRate)
+    .sort(handleFilterProductsBySort);
+
+  const hasProducts = filtredProducts.length > 0;
+  const maxPage = Math.ceil(filtredProducts.length / 3);
+  const isPrevButtonDisable = indexPagination === 1;
+  const isNextButtonDisable = indexPagination === maxPage;
+  console.log(filtredProducts);
   return (
     <VStack>
       <HStack spacing="20px" alignItems="stretch" justifyContent="space-between" my={42}>
         {hasProducts ? (
-          handleFilterProductsByName()
-            .filter(handeFilterProductsByRate)
-            .sort(handleFilterProductsBySort)
-            .map(handleRenderProduct)
+          filtredProducts.map(handleRenderProduct)
         ) : (
           <Text as="h1" color="black">
             Sem dados
