@@ -1,6 +1,6 @@
 // prettier-ignore
 import { Input, InputGroup, InputRightElement, Icon ,Stack,Flex, } from "@chakra-ui/react";
-import { useContext } from "react";
+import { FormEventHandler, useContext } from "react";
 import { AiOutlineSearch } from "react-icons/ai";
 
 import { SelectInput } from "./CustomSelect/";
@@ -27,11 +27,12 @@ export function SearchInput() {
       </InputGroup>
       <Flex justifyContent="space-between" w="100%">
         <SelectInput label="Filter by rating">
-          <Option title="1 Start" name="select-options-stars" id="op-1" value="1" />
-          <Option title="2 Starts" name="select-options-stars" id="op-2" value="2" />
-          <Option title="3 Starts" name="select-options-stars" id="op-3" value="3" />
-          <Option title="4 Starts" name="select-options-stars" id="op-4" value="4" />
-          <Option title="5 Starts" name="select-options-stars" id="op-5" value="5" />
+          <Option title="1 Star" name="select-options-stars" id="op-1" value="1" />
+          <Option title="2 Stars" name="select-options-stars" id="op-2" value="2" />
+          <Option title="3 Stars" name="select-options-stars" id="op-3" value="3" />
+          <Option title="4 Stars" name="select-options-stars" id="op-4" value="4" />
+          <Option title="5 Stars" name="select-options-stars" id="op-5" value="5" />
+          <Option title="Filter by rating" name="select-options-stars" id="op-5" value="0" />
         </SelectInput>
 
         <SelectInput label="Sort by">

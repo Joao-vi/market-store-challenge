@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 
 export const SelectButton = styled.button`
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;

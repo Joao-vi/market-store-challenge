@@ -17,7 +17,7 @@ interface IAPIData {
 
 export function ProductsGrid() {
   const { products } = useContext(productContext);
-  const { input } = useContext(searchInputConext);
+  const { input, inputRate, inputSort } = useContext(searchInputConext);
   const [indexPagination, setIndexPagination] = useState(1);
 
   const hasProducts = products.length > 0;
@@ -35,10 +35,30 @@ export function ProductsGrid() {
   const shouldRenderProduct = (key: number) =>
     indexPagination * 3 - 3 <= key && key <= indexPagination * 3 - 1;
 
-  const handleFilterProducts = () =>
+  const handleFilterProductsByName = () =>
     products.filter(({ title }) => {
       return title.toLowerCase().includes(input.toLowerCase());
     });
+
+  const handeFilterProductsByRate = (product: IAPIData) => {
+    const min = inputRate;
+    const max = inputRate + 0.99999;
+    if (min === 0) {
+      return true; // 0 === Sem filtro aplicado, irá retornar todos os produtos.
+    } else {
+      const rateInterval = min <= product.rating.rate && product.rating.rate <= max;
+      return rateInterval;
+    }
+  };
+  const handleFilterProductsBySort = (a: IAPIData, b: IAPIData) => {
+    if (inputSort === "H") {
+      return parseInt(b.price, 10) - parseInt(a.price, 10);
+    } else if (inputSort === "L") {
+      return parseInt(a.price, 10) - parseInt(b.price, 10);
+    }
+
+    return 1;
+  };
 
   const handleRenderProduct = (product: IAPIData, key: number) => {
     if (shouldRenderProduct(key)) {
@@ -49,7 +69,10 @@ export function ProductsGrid() {
     <VStack>
       <HStack spacing="20px" alignItems="stretch" justifyContent="space-between" my={42}>
         {hasProducts ? (
-          handleFilterProducts().map(handleRenderProduct)
+          handleFilterProductsByName()
+            .filter(handeFilterProductsByRate)
+            .sort(handleFilterProductsBySort)
+            .map(handleRenderProduct)
         ) : (
           <Text as="h1" color="black">
             Sem dados
